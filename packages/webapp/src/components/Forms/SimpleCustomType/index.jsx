@@ -25,6 +25,7 @@ import { IconLink } from '../../Typography';
 import { MdOutlineInventory2 } from 'react-icons/md';
 import DeleteBox from '../../Task/TaskReadOnly/DeleteBox';
 import { hookFormMaxCharsValidation } from '../../Form/hookformValidationUtils';
+import useHookFormPersist from '../../../containers/hooks/useHookFormPersist';
 
 /**
  * React component for the addition of custom type with just a name field this form has add,
@@ -79,6 +80,8 @@ const PureSimpleCustomType = ({
   const readonly = view === 'read-only' || false;
   const disabledInput = readonly;
   const disabledButton = (!isValid || !isDirty) && !readonly;
+
+  useHookFormPersist();
 
   return (
     <Form

@@ -39,7 +39,7 @@ export default function ManageCustomTypes({
     mode: 'onChange',
   });
 
-  useHookFormPersist(getValues);
+  // useHookFormPersist(getValues);
   register(customTypeFieldName);
   const selectedTileId = watch(customTypeFieldName);
 
