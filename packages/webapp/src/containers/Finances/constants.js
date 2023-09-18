@@ -36,3 +36,8 @@ export const SET_EXPENSE_DETAIL_ITEM = 'SET_EXPENSE_DETAIL_ITEM';
 export const TEMP_SET_EXPENSE_TO_EDIT = 'TEMP_SET_EXPENSE_TO_EDIT';
 export const TEMP_EDIT_EXPENSE = 'TEMP_EDIT_EXPENSE';
 export const TEMP_DELETE_EXPENSE = 'TEMP_DELETE_EXPENSE';
+
+export const revenueFormTypes = {
+  CROP_SALE: 'crop_sale',
+  GENERAL: 'general',
+};
