@@ -122,11 +122,10 @@ const OtherExpense = () => {
         detailedHistory.push({
           date: moment(e.expense_date),
           type: getExpenseType(e.expense_type_id),
-          amount: currencySymbol + amount.toFixed(2).toString(),
           expense_date: e.expense_date,
-          note: e.note,
+          name: e.note,
           expense_item_id: e.farm_expense_id,
-          value: amount,
+          amount,
         });
       }
     }
@@ -163,6 +162,30 @@ const OtherExpense = () => {
     },
   ];
 
+  const newColumns = [
+    {
+      id: 'type',
+      numeric: false,
+      disablePadding: true,
+      label: t('SALE.SUMMARY.TYPE'),
+      minWidth: 80,
+      format: (d) => <b>{d.type}</b>,
+      // id: 'type',
+      // Header: t('SALE.SUMMARY.TYPE'),
+      // accessor: (d) => d.type,
+      // minWidth: 80,
+      // Footer: <div>{t('SALE.SUMMARY.TOTAL')}</div>,
+    },
+    {
+      id: 'amount',
+      numeric: true,
+      disablePadding: true,
+      label: t('SALE.SUMMARY.AMOUNT'),
+      minWidth: 75,
+      format: (d) => <span>{`${currencySymbol}${d.amount.toFixed(2).toString()}`}</span>,
+      // Footer: <div>{currencySymbol + totalData}</div>,
+    },
+  ];
   const detailedColumns = [
     {
       id: 'date',
@@ -198,6 +221,45 @@ const OtherExpense = () => {
       accessor: () => <BsCaretRight />,
     },
   ];
+  const newDetailedColumns = [
+    {
+      id: 'date',
+      label: t('SALE.LABOUR.TABLE.DATE'),
+      numeric: false,
+      disablePadding: true,
+      format: (d) => <span>{d.date.toDate().toLocaleDateString()}</span>,
+      // minWidth: 70,
+      Footer: <div>{t('SALE.SUMMARY.SUBTOTAL')}</div>,
+    },
+    {
+      id: 'type',
+      label: t('SALE.LABOUR.TABLE.TYPE'),
+      numeric: false,
+      disablePadding: true,
+      // minWidth: 55,
+    },
+    {
+      id: 'name',
+      label: t('common:NAME'),
+      numeric: false,
+      disablePadding: true,
+      // minWidth: 55,
+    },
+    {
+      id: 'amount',
+      label: t('SALE.LABOUR.TABLE.AMOUNT'),
+      numeric: true,
+      disablePadding: true,
+      format: (d) => <span>{`${currencySymbol}${d.amount.toFixed(2).toString()}`}</span>,
+      // minWidth: 55,
+      Footer: <div>{currencySymbol + totalDetailed}</div>,
+    },
+    {
+      id: 'chevron',
+      // maxWidth: 25,
+      accessor: () => <BsCaretRight />,
+    },
+  ];
 
   return (
     <div className={defaultStyles.financesContainer}>
@@ -208,7 +270,7 @@ const OtherExpense = () => {
       <div className={styles.tableContainer} style={{ marginBottom: '16px' }}>
         {data.length > 0 && (
           <Table
-            columns={columns}
+            columns={newColumns}
             data={data}
             showPagination={true}
             pageSizeOptions={[5, 10, 20, 50]}
@@ -224,7 +286,7 @@ const OtherExpense = () => {
         {detailedHistory.length > 0 && (
           <div>
             <Table
-              columns={detailedColumns}
+              columns={newDetailedColumns}
               data={detailedHistory}
               showPagination={true}
               pageSizeOptions={[5, 10, 20, 50]}

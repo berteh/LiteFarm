@@ -30,7 +30,9 @@ const Employee = ({ currencySymbol, tasks, startDate, endDate }) => {
 
       if (sortObj.hasOwnProperty(task.assignee_user_id)) {
         let referenceObj = sortObj[task.assignee_user_id];
-        referenceObj.labour_cost = roundToTwoDecimal(roundToTwoDecimal(referenceObj.labour_cost) + labour_cost);
+        referenceObj.labour_cost = roundToTwoDecimal(
+          roundToTwoDecimal(referenceObj.labour_cost) + labour_cost,
+        );
         referenceObj.hours = roundToTwoDecimal(referenceObj.hours + hours);
       } else {
         sortObj[task.assignee_user_id] = {
@@ -71,10 +73,39 @@ const Employee = ({ currencySymbol, tasks, startDate, endDate }) => {
       accessor: (d) => d.labour_cost,
     },
   ];
+  // id: 'type',
+  // numeric: false,
+  // disablePadding: true,
+  // label: t('SALE.SUMMARY.TYPE'),
+  // minWidth: 80,
+  // format: (d) => <b>{d.type}</b>,
+  const newColumns = [
+    {
+      id: 'employee',
+      numeric: false,
+      label: t('SALE.LABOUR.TABLE.EMPLOYEE'),
+      accessor: (d) => d.employee,
+      minWidth: 80,
+    },
+    {
+      id: 'time',
+      numeric: false,
+      label: t('SALE.LABOUR.TABLE.TIME'),
+      accessor: (d) => d.time,
+      minWidth: 75,
+    },
+    {
+      id: 'labour_cost',
+      numeric: true,
+      label: t('SALE.LABOUR.TABLE.LABOUR_COST'),
+      accessor: (d) => d.labour_cost,
+    },
+  ];
 
   return (
     <Table
-      columns={columns}
+      // columns={columns}
+      columns={newColumns}
       data={data}
       showPagination={true}
       pageSizeOptions={[10, 20, 50]}

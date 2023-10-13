@@ -16,20 +16,23 @@
 import ReactTable from 'react-table';
 import React from 'react';
 import { useTranslation } from 'react-i18next';
+import New from './v2';
 
 // refer to Log/index.js for example on how to format columns and data props, or read react-table documentation
-function Table({
-  columns,
-  data,
-  showPagination,
-  pageSizeOptions,
-  defaultPageSize,
-  className,
-  getTdProps,
-  sortByID,
-  minRows = 5,
-  orderDesc = true,
-}) {
+function Table(props) {
+  const {
+    columns,
+    data,
+    showPagination,
+    pageSizeOptions,
+    defaultPageSize,
+    className,
+    getTdProps,
+    sortByID,
+    minRows = 5,
+    orderDesc = true,
+  } = props;
+  // return <New {...props} />;
   const { t } = useTranslation();
   const defaultSorted = sortByID
     ? [

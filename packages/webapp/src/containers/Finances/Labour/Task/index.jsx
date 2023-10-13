@@ -25,8 +25,10 @@ const Task = ({ currencySymbol, tasks, startDate, endDate }) => {
       const labour_cost = roundToTwoDecimal(rate * hours);
 
       if (sortObj.hasOwnProperty(task.task_type_id)) {
-        sortObj[task.task_type_id].time = roundToTwoDecimal(sortObj[task.task_type_id].time) + minutes;
-        sortObj[task.task_type_id].labour_cost = roundToTwoDecimal(sortObj[task.task_type_id].labour_cost) + labour_cost;
+        sortObj[task.task_type_id].time =
+          roundToTwoDecimal(sortObj[task.task_type_id].time) + minutes;
+        sortObj[task.task_type_id].labour_cost =
+          roundToTwoDecimal(sortObj[task.task_type_id].labour_cost) + labour_cost;
       } else {
         sortObj[task.task_type_id] = {
           time: minutes,
@@ -48,29 +50,50 @@ const Task = ({ currencySymbol, tasks, startDate, endDate }) => {
     });
   }
 
-  const columns = [
+  // const columns = [
+  //   {
+  //     id: 'task',
+  //     Header: t('SALE.LABOUR.TABLE.TASK'),
+  //     accessor: (d) => d.task,
+  //     minWidth: 80,
+  //   },
+  //   {
+  //     id: 'time',
+  //     Header: t('SALE.LABOUR.TABLE.TIME'),
+  //     accessor: (d) => d.time,
+  //     minWidth: 75,
+  //   },
+  //   {
+  //     id: 'labour_cost',
+  //     Header: t('SALE.LABOUR.TABLE.LABOUR_COST'),
+  //     accessor: (d) => d.labour_cost,
+  //   },
+  // ];
+
+  const newColumns = [
     {
       id: 'task',
-      Header: t('SALE.LABOUR.TABLE.TASK'),
+      label: t('SALE.LABOUR.TABLE.TASK'),
       accessor: (d) => d.task,
       minWidth: 80,
     },
     {
       id: 'time',
-      Header: t('SALE.LABOUR.TABLE.TIME'),
+      label: t('SALE.LABOUR.TABLE.TIME'),
       accessor: (d) => d.time,
       minWidth: 75,
     },
     {
       id: 'labour_cost',
-      Header: t('SALE.LABOUR.TABLE.LABOUR_COST'),
+      label: t('SALE.LABOUR.TABLE.LABOUR_COST'),
       accessor: (d) => d.labour_cost,
     },
   ];
 
   return (
     <Table
-      columns={columns}
+      // columns={columns}
+      columns={newColumns}
       data={data}
       showPagination={true}
       pageSizeOptions={[10, 20, 50]}
