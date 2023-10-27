@@ -845,7 +845,10 @@
     "MANAGE_CUSTOM_TYPE": "MISSING",
     "REVENUE": "Receita",
     "TRANSACTION": {
+      "CROPS": "MISSING",
+      "DAILY_TOTAL": "MISSING",
       "LABOUR_EXPENSE": "MISSING",
+      "QUANTITY": "MISSING",
       "VIEW_AND_EDIT": "MISSING",
       "VIEW_DETAILS": "MISSING"
     },
