@@ -62,7 +62,7 @@ const generateRows = (t, data, currencySymbol, mobileView) => {
           }
           iconClickOnly={false}
           classes={{ mainContentWithIcon: styles.expandableItem }}
-          key={`transaction-${index}`}
+          itemKey={`transaction-${index}`}
         />
       </div>,
     );
