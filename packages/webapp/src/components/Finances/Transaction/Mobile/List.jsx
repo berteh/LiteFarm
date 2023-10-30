@@ -39,19 +39,18 @@ const generateRows = (t, data, currencySymbol, mobileView) => {
   const { expandedIds, toggleExpanded } = useExpandable({ isSingleExpandable: true });
   const rows = [];
 
-  data.forEach((values, index) => {
+  data.forEach((values) => {
     // TODO: LF-3746 add "date" row as necessary
 
-    const isExpanded = expandedIds.includes(index);
+    const { transactionType, relatedId, date } = values;
+    const key = `${transactionType}+${relatedId || date}`;
+    const isExpanded = expandedIds.includes(key);
 
     rows.push(
-      <div
-        key={index}
-        className={clsx(styles.expandableItemWrapper, isExpanded && styles.expanded)}
-      >
+      <div key={key} className={clsx(styles.expandableItemWrapper, isExpanded && styles.expanded)}>
         <ExpandableItem
           isExpanded={isExpanded}
-          onClick={() => toggleExpanded(index)}
+          onClick={() => toggleExpanded(key)}
           mainContent={<MainContent t={t} {...values} currencySymbol={currencySymbol} />}
           expandedContent={
             <ExpandedContent
@@ -62,7 +61,7 @@ const generateRows = (t, data, currencySymbol, mobileView) => {
           }
           iconClickOnly={false}
           classes={{ mainContentWithIcon: styles.expandableItem }}
-          itemKey={`transaction-${index}`}
+          itemKey={`transaction-${key}`}
         />
       </div>,
     );
